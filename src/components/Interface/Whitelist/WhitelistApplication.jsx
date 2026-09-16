@@ -196,7 +196,7 @@ export default function WhitelistApplication() {
 						disabled={completedTasks.length < tasks.length || !user || !walletAddress.trim() || !discordUser.trim() || claiming}
 						onClick={() => submitClaim(null)}
 					>
-						{claiming ? 'SUBMITTING...' : 'APPLY FOR GTD'} <span>✦</span>
+						{claiming ? 'SUBMITTING...' : 'APPLY FOR GTD'}
 					</button>
 				)}
 				

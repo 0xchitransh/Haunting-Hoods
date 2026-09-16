@@ -109,14 +109,24 @@ export default function CheckerPage() {
 							<div className={`checker-result ${result.type.toLowerCase()}`}>
 								<h3>{result.type === 'NONE' ? 'NOT ELIGIBLE' : `${result.type} ELIGIBLE`}</h3>
 								<p>{result.message}</p>
-								
-								<button className="checker-btn retry" onClick={() => {
-									setStatus('IDLE');
-									setAddress('');
-									setResult(null);
-								}}>
-									CHECK ANOTHER
-								</button>
+								<div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+									{result.type === 'NONE' && (
+										<a 
+											href="/#whitelist" 
+											className="checker-btn" 
+											style={{ textDecoration: 'none', display: 'inline-block', backgroundColor: 'rgba(255, 77, 77, 0.1)', borderColor: '#ff4d4d', color: '#ff4d4d', marginTop: '1rem', padding: '1rem', fontSize: '0.8rem' }}
+										>
+											GRAB YOUR LAST CHANCE
+										</a>
+									)}
+									<button className="checker-btn retry" onClick={() => {
+										setStatus('IDLE');
+										setAddress('');
+										setResult(null);
+									}}>
+										CHECK ANOTHER
+									</button>
+								</div>
 							</div>
 						)}
 					</div>

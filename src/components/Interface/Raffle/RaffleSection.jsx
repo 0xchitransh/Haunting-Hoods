@@ -197,7 +197,7 @@ export default function RaffleSection() {
 						disabled={status === 'checking' || !walletAddress.trim()}
 						style={{ backgroundColor: '#9146FF', borderColor: '#9146FF', color: 'white' }}
 					>
-						{status === 'checking' ? 'ENTERING...' : 'PARTICIPATE'} <span>✦</span>
+						{status === 'checking' ? 'ENTERING...' : 'PARTICIPATE'}
 					</button>
 				) : (
 					<button 
@@ -206,7 +206,7 @@ export default function RaffleSection() {
 						disabled={status === 'checking' || isConnecting}
 						style={{ backgroundColor: 'transparent', borderColor: '#9146FF', color: '#9146FF' }}
 					>
-						{status === 'checking' || isConnecting ? 'VERIFYING...' : 'VERIFY DISCORD ROLE'} <span>✦</span>
+						{status === 'checking' || isConnecting ? 'VERIFYING...' : 'VERIFY DISCORD ROLE'}
 					</button>
 				)}
 			</div>

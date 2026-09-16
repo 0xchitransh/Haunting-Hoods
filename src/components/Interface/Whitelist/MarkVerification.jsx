@@ -17,7 +17,7 @@ export default function MarkVerification() {
 						<strong style={{ color: '#fff', fontSize: '1.2rem', display: 'block', marginTop: '1rem' }}>Another hunt is live. This time, much bigger.</strong>
 					</p>
 					<a href="/the-seal-engine" className="wl-submit-btn" style={{ display: 'inline-block', textDecoration: 'none', background: 'rgba(255, 77, 77, 0.1)', border: '1px solid #ff4d4d', color: '#ff4d4d', padding: '1rem 2rem', fontFamily: '"Space Mono", monospace', letterSpacing: '2px', transition: 'all 0.3s ease' }}>
-						ENTER THE SEAL ENGINE <span>✦</span>
+						ENTER THE SEAL ENGINE
 					</a>
 				</div>
 			</div>

@@ -24,6 +24,16 @@ export default function LandingPage() {
 	const openClaimPanel = useWhitelist((state) => state.openClaimPanel);
 	const [showComingSoon, setShowComingSoon] = useState(false);
 
+	useEffect(() => {
+		if (window.location.hash) {
+			const id = window.location.hash.substring(1);
+			const element = document.getElementById(id);
+			if (element) {
+				setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 100);
+			}
+		}
+	}, []);
+
 	const handleComingSoon = (e) => {
 		e.preventDefault();
 		setShowComingSoon(true);
@@ -63,7 +73,7 @@ export default function LandingPage() {
 							style={{ background: '#451717', borderColor: '#ff4d4d', display: 'inline-block', textDecoration: 'none' }}
 							href="#whitelist"
 						>
-							APPLY FOR GTD <span>✦</span>
+							APPLY FOR GTD
 						</a>
 					</div>
 					<div className="hero-art">
