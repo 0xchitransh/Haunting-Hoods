@@ -110,7 +110,11 @@ const useWhitelist = create((set, get) => ({
 			get().refreshCampaign();
 		} catch (error) {
 			console.error("Claim error:", error);
-			set({ claiming: false, claimError: error.message || error.code || 'UNKNOWN' });
+			if (error.code === 'ALREADY_CLAIMED') {
+				set({ claiming: false, alreadyClaimed: true, claimError: null });
+			} else {
+				set({ claiming: false, claimError: error.message || error.code || 'UNKNOWN' });
+			}
 		}
 	},
 }));

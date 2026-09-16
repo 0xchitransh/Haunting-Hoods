@@ -167,9 +167,12 @@ export const claimWhitelistSpot = async ({
 		const err = new Error(error.message);
 		if (error.message.includes('CAMPAIGN_INACTIVE')) err.code = CLAIM_ERRORS.CAMPAIGN_INACTIVE;
 		if (error.message.includes('SOLD_OUT')) err.code = CLAIM_ERRORS.SOLD_OUT;
-		if (error.message.includes('duplicate key value violates unique constraint "whitelist_claims_pkey"')) {
+		if (
+			error.message.includes('duplicate key value violates unique constraint') &&
+			(error.message.includes('whitelist_claims_pkey') || error.message.includes('whitelist_claims_v2_pkey'))
+		) {
 			err.code = CLAIM_ERRORS.ALREADY_CLAIMED;
-			err.message = 'You have already claimed a whitelist spot';
+			err.message = 'You have already submitted an application.';
 		}
 		throw err;
 	}
