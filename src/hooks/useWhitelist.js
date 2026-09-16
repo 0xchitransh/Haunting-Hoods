@@ -109,7 +109,8 @@ const useWhitelist = create((set, get) => ({
 			});
 			get().refreshCampaign();
 		} catch (error) {
-			set({ claiming: false, claimError: error.code || 'UNKNOWN' });
+			console.error("Claim error:", error);
+			set({ claiming: false, claimError: error.message || error.code || 'UNKNOWN' });
 		}
 	},
 }));
