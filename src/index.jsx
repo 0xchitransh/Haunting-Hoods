@@ -9,6 +9,7 @@ import UtilityPage from './components/Interface/Utility/UtilityPage';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import WhitelistPage from './components/WhitelistPage';
 import SealEnginePage from './components/Interface/SealEngine/SealEnginePage';
+import CheckerPage from './components/Interface/Checker/CheckerPage';
 import { LORE_DATA } from './data/lore';
 import { UTILITY_DATA } from './data/utility';
 import { ROADMAP_DATA } from './data/roadmap';
@@ -144,8 +145,9 @@ const isRoadmapRoute = pathname.startsWith('/roadmap');
 const isAdminRoute = pathname.startsWith('/admin');
 const isWhitelistRoute = pathname.startsWith('/whitelist');
 const isSealEngineRoute = pathname.startsWith('/the-seal-engine');
+const isCheckerRoute = pathname.startsWith('/checker');
 
-const isInfoRoute = isLoreRoute || isUtilityRoute || isRoadmapRoute || isAdminRoute || isWhitelistRoute || isSealEngineRoute;
+const isInfoRoute = isLoreRoute || isUtilityRoute || isRoadmapRoute || isAdminRoute || isWhitelistRoute || isSealEngineRoute || isCheckerRoute;
 const isLandingMode = !isGameRoute;
 
 document.documentElement.classList.toggle('landing-mode', isLandingMode);
@@ -203,6 +205,7 @@ root.render(
 			{isAdminRoute && <AdminDashboard />}
 			{isWhitelistRoute && <WhitelistPage />}
 			{isSealEngineRoute && <SealEnginePage />}
+			{isCheckerRoute && <CheckerPage />}
 			{!isGameRoute && !isInfoRoute && <LandingPage />}
 			
 			{!isGameRoute && !isAdminRoute && (

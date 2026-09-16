@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import SealMachine from './Machine/SealMachine';
 import EngineControls from './Controls/EngineControls';
 import DispenseSequence from './DispenseSequence';
-import HoodPlacement from '../Story/HoodPlacement';
 import useSealEngine from '../../../hooks/useSealEngine';
 import './SealEngine.css';
 
@@ -67,11 +66,6 @@ export default function SealEnginePage() {
 				alignItems: 'center',
 				justifyContent: 'center'
 			}}>
-				<HoodPlacement spotId="engine-1" index={3} style={{ position: 'absolute', top: '20%', left: '15%' }} />
-				<HoodPlacement spotId="engine-2" index={4} style={{ position: 'absolute', top: '15%', right: '20%' }} />
-				<HoodPlacement spotId="engine-3" index={5} style={{ position: 'absolute', bottom: '25%', right: '15%' }} />
-				<HoodPlacement spotId="engine-4" index={6} style={{ position: 'absolute', bottom: '20%', left: '25%' }} />
-				
 				<SealMachine />
 			</main>
 

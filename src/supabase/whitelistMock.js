@@ -9,7 +9,7 @@
 const STORAGE_KEYS = {
 	user: 'mock_whitelist_user_v3',
 	campaign: 'mock_whitelist_campaign_v3',
-	claims: 'mock_whitelist_claims_v3',
+	claims: 'mock_whitelist_claims_v4',
 };
 
 const listeners = new Set();

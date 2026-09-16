@@ -6,7 +6,7 @@ import useInterface from '../../hooks/useInterface';
 import useGame from '../../hooks/useGame';
 import useGameplaySettings from '../../hooks/useGameplaySettings';
 import useWhitelist from '../../hooks/useWhitelist';
-import '../Interface/Whitelist/WhitelistClaimPanel.css';
+
 
 const CORRIDORLENGTH = 5.95;
 // Offset roughly mirrors other wall-mounted objective props (e.g. Bedsheets),

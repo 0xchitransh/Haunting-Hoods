@@ -18,7 +18,6 @@ import useLocalization from '../../hooks/useLocalization';
 import Cursor from './Cursor';
 import EndGameScreen from './EndGameScreen/EndGameScreen';
 import GuestBook from './GuestBook/GuestBook';
-import WhitelistClaimPanel from './Whitelist/WhitelistClaimPanel';
 import HowItsMade from './HowItsMade/HowItsMade';
 import DeathScreen from './DeathScreen/DeathScreen';
 import './Interface.css';
@@ -982,7 +981,6 @@ export default function Interface() {
 			<EndGameScreen />
 
 			<GuestBook />
-			<WhitelistClaimPanel />
 			<HowItsMade />
 		</div>
 	);

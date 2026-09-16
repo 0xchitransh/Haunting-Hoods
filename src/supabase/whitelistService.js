@@ -9,7 +9,7 @@ import {
 } from './whitelistMock';
 
 const CAMPAIGNS_COLLECTION = 'whitelist_campaigns';
-const CLAIMS_COLLECTION = 'whitelist_claims';
+const CLAIMS_COLLECTION = 'whitelist_claims_v2';
 const VERIFICATIONS_COLLECTION = 'mark_verifications';
 
 export const getTodayCampaignId = () => {

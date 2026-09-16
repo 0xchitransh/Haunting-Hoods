@@ -6,7 +6,7 @@ const tasks = [
 	{ id: 1, title: 'Follow us', description: '@Haunting_Hoods', action: 'FOLLOW', url: 'https://x.com/intent/follow?screen_name=Haunting_Hoods' },
 	{ id: 2, title: 'Like the pinned post', description: 'One tap', action: 'LIKE', url: 'https://x.com/intent/like?tweet_id=2099943861900791997' },
 	{ id: 3, title: 'Repost', description: 'Spread the word', action: 'REPOST', url: 'https://x.com/intent/retweet?tweet_id=2099943861900791997' },
-	{ id: 4, title: 'Leave a comment', description: 'Say which clan you seek', action: 'REPLY', url: 'https://x.com/intent/post?in_reply_to=2099943861900791997' },
+	{ id: 4, title: 'Leave a comment', description: 'Say something about our art', action: 'REPLY', url: 'https://x.com/intent/post?in_reply_to=2099943861900791997' },
 	{ id: 5, title: 'Quote tweet', description: 'Tag humans you\'d drag into the darkness', action: 'QUOTE', url: 'https://x.com/intent/retweet?tweet_id=2099943861900791997' },
 	{ id: 6, title: 'Join our Discord', description: 'Enter the Sanctum', action: 'JOIN', url: 'https://discord.gg/hauntinghoods' },
 ];
@@ -47,7 +47,7 @@ export default function WhitelistApplication() {
 		<section className="wl-application-section" id="whitelist">
 			<div className="wl-app-container">
 				<div className="wl-app-header">
-					
+					<div className="wl-urgency-banner">LAST CHANCE TO GRAB 200 GTD SPOTS</div>
 					<p className="eyebrow">APPLICATION</p>
 					<h2>SECURE YOUR SPOT.</h2>
 					<p className="wl-app-subtitle">
@@ -196,7 +196,7 @@ export default function WhitelistApplication() {
 						disabled={completedTasks.length < tasks.length || !user || !walletAddress.trim() || !discordUser.trim() || claiming}
 						onClick={() => submitClaim(null)}
 					>
-						{claiming ? 'SUBMITTING...' : 'APPLY FOR WHITELIST'} <span>✦</span>
+						{claiming ? 'SUBMITTING...' : 'APPLY FOR GTD'} <span>✦</span>
 					</button>
 				)}
 				
