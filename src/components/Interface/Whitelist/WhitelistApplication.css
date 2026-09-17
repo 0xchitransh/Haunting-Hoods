@@ -397,3 +397,101 @@
 		width: 100%;
 	}
 }
+
+/* === SEAL BREAKING / MINT SECTION === */
+.seal-breaking-container {
+	text-align: center;
+	padding: 5rem 2.5rem;
+}
+
+.seal-breaking-eyebrow {
+	display: inline-block;
+	background: rgba(255, 77, 77, 0.08);
+	border: 1px solid rgba(255, 77, 77, 0.3);
+	color: #ff4d4d;
+	font-family: 'Space Mono', monospace;
+	font-size: 0.7rem;
+	padding: 0.4rem 1.2rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin-bottom: 2rem;
+	border-radius: 2px;
+}
+
+.seal-breaking-title {
+	font-size: clamp(2.2rem, 6vw, 3.5rem);
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	margin: 0 0 1.5rem;
+	text-shadow: 0 0 40px rgba(255, 77, 77, 0.3);
+	line-height: 1.1;
+}
+
+.seal-breaking-subtitle {
+	color: #888;
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 auto 3rem;
+	max-width: 420px;
+}
+
+.seal-breaking-glyph {
+	width: 160px;
+	height: 160px;
+	margin: 0 auto 3rem;
+	opacity: 0.6;
+	filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.4));
+}
+
+.seal-breaking-glyph svg {
+	width: 100%;
+	height: 100%;
+}
+
+.rotate-slow {
+	transform-origin: center;
+	animation: rotateSlow 20s linear infinite;
+}
+
+.rotate-reverse {
+	transform-origin: center;
+	animation: rotateSlow 14s linear infinite reverse;
+}
+
+@keyframes rotateSlow {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.mint-btn {
+	display: inline-block;
+	text-decoration: none;
+	background: rgba(255, 77, 77, 0.1);
+	border: 1px solid #ff4d4d;
+	color: #ff4d4d !important;
+	padding: 1.2rem 3rem;
+	font-family: 'Space Mono', monospace;
+	font-size: 0.9rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	width: auto;
+}
+
+.mint-btn:hover {
+	background: rgba(255, 77, 77, 0.2);
+	box-shadow: 0 0 30px rgba(255, 77, 77, 0.25);
+	text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+.seal-breaking-note {
+	margin-top: 1.5rem;
+	color: #444;
+	font-size: 0.75rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	font-family: 'Space Mono', monospace;
+}
+

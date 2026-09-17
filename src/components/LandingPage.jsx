@@ -64,16 +64,18 @@ export default function LandingPage() {
 				<section className="landing-hero" id="hero">
 					<div className="hero-copy">
 						<p className="hero-kicker" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-							THE SEAL IS WEAKENING <span>•</span>
+							THE SEAL IS BREAKING <span>•</span>
 						</p>
 						<h1>HAUNTING<br />HOODS</h1>
 						<p className="hero-description">4444 entities were sealed away<br />to keep the balance. They will return.</p>
 						<a
 							className="primary-button"
 							style={{ background: '#451717', borderColor: '#ff4d4d', display: 'inline-block', textDecoration: 'none' }}
-							href="#whitelist"
+							href="https://opensea.io/collection/haunting-hoods-4444/overview"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
-							APPLY FOR GTD
+							MINT NOW
 						</a>
 					</div>
 					<div className="hero-art">

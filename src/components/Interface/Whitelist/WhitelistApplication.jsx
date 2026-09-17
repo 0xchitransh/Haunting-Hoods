@@ -1,205 +1,40 @@
-import { useState, useEffect } from 'react';
-import useWhitelist from '../../../hooks/useWhitelist';
 import './WhitelistApplication.css';
 
-const tasks = [
-	{ id: 1, title: 'Follow us', description: '@Haunting_Hoods', action: 'FOLLOW', url: 'https://x.com/intent/follow?screen_name=Haunting_Hoods' },
-	{ id: 2, title: 'Like the pinned post', description: 'One tap', action: 'LIKE', url: 'https://x.com/intent/like?tweet_id=2100313340694454606' },
-	{ id: 3, title: 'Repost', description: 'Spread the word', action: 'REPOST', url: 'https://x.com/intent/retweet?tweet_id=2100313340694454606' },
-	{ id: 4, title: 'Leave a comment', description: 'Say something about our art', action: 'REPLY', url: 'https://x.com/intent/post?in_reply_to=2100313340694454606' },
-	{ id: 5, title: 'Quote tweet', description: 'Tag humans you\'d drag into the darkness', action: 'QUOTE', url: 'https://x.com/intent/retweet?tweet_id=2100313340694454606' },
-	{ id: 6, title: 'Join our Discord', description: 'Enter the Sanctum', action: 'JOIN', url: 'https://discord.gg/hauntinghoods' },
-];
+const MINT_LINK = 'https://opensea.io/collection/haunting-hoods-4444/overview';
 
 export default function WhitelistApplication() {
-	const [completedTasks, setCompletedTasks] = useState([]);
-	
-	const {
-		user, 
-		connectTwitter, 
-		walletAddress, 
-		setWalletAddress, 
-		discordUser,
-		setDiscordUser,
-		quoteTweetLink,
-		setQuoteTweetLink,
-		submitClaim, 
-		claiming, 
-		alreadyClaimed,
-		claimResult,
-		claimError
-	} = useWhitelist();
-
-	useEffect(() => {
-		if (alreadyClaimed) {
-			setCompletedTasks(tasks.map(t => t.id));
-		}
-	}, [alreadyClaimed]);
-
-	const handleTaskClick = (id, url) => {
-		if (url) window.open(url, '_blank', 'noopener,noreferrer');
-		if (!completedTasks.includes(id)) {
-			setCompletedTasks([...completedTasks, id]);
-		}
-	};
-
 	return (
 		<section className="wl-application-section" id="whitelist">
-			<div className="wl-app-container">
-				<div className="wl-app-header">
-					<div className="wl-urgency-banner">LAST CHANCE TO GRAB 200 GTD SPOTS</div>
-					<p className="eyebrow">APPLICATION</p>
-					<h2>SECURE YOUR SPOT.</h2>
-					<p className="wl-app-subtitle">
-						Four tasks on X, then drop your details. Spots are limited — finishing<br/>the tasks puts you on the list.
-					</p>
+			<div className="wl-app-container seal-breaking-container">
+				<div className="seal-breaking-eyebrow">THE SANCTUM OPENS</div>
+				<h2 className="seal-breaking-title">THE SEAL IS BREAKING.</h2>
+				<p className="seal-breaking-subtitle">
+					The 4444 have waited long enough. The veil is tearing.<br />
+					Step through. Claim your Hood.
+				</p>
+
+				<div className="seal-breaking-glyph" aria-hidden="true">
+					<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="100" cy="100" r="90" stroke="#ff4d4d" strokeWidth="0.5" strokeDasharray="4 6" className="rotate-slow"/>
+						<circle cx="100" cy="100" r="65" stroke="#ff4d4d" strokeWidth="0.3" strokeDasharray="2 8" className="rotate-reverse"/>
+						<circle cx="100" cy="100" r="40" stroke="#ff4d4d" strokeWidth="0.5" opacity="0.5"/>
+						<path d="M100 10 L110 55 L155 40 L125 75 L165 90 L120 100 L155 125 L110 120 L100 165 L90 120 L45 125 L80 100 L35 90 L75 75 L45 40 L90 55 Z" stroke="#ff4d4d" strokeWidth="0.5" fill="none" opacity="0.4"/>
+						<circle cx="100" cy="100" r="4" fill="#ff4d4d" opacity="0.8"/>
+					</svg>
 				</div>
 
-				<div className="wl-tasks-section">
-					<div className="wl-tasks-header">
-						<span>TASKS</span>
-						<span className="wl-tasks-count"><span className="highlight">{completedTasks.length}</span> OF {tasks.length}</span>
-					</div>
-					
-					<div className="wl-connect-twitter">
-						<button 
-							className={`wl-connect-btn ${user ? 'connected' : ''}`}
-							onClick={user ? undefined : connectTwitter}
-							disabled={user !== null}
-						>
-							{user 
-								? `CONNECTED: @${user.user_metadata?.user_name || user.user_metadata?.preferred_username || user.user_metadata?.name || 'USER'}` 
-								: 'CONNECT X (TWITTER)'
-							}
-						</button>
-						{user && (
-							<button 
-								className="wl-disconnect-btn" 
-								onClick={() => {
-									useWhitelist.getState().disconnect();
-									setCompletedTasks([]);
-									setWalletAddress('');
-									setDiscordUser('');
-									if (setQuoteTweetLink) setQuoteTweetLink('');
-								}}
-								style={{ background: 'none', border: 'none', color: '#ff4d4d', fontSize: '0.6rem', marginTop: '0.5rem', cursor: 'pointer', textDecoration: 'underline' }}
-							>
-								SIGN OUT
-							</button>
-						)}
-					</div>
+				<a
+					href={MINT_LINK}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="wl-submit-btn mint-btn"
+				>
+					MINT ON OPENSEA
+				</a>
 
-					<div className="wl-tasks-list">
-						{tasks.map((task) => {
-							const isCompleted = completedTasks.includes(task.id);
-							return (
-								<div className={`wl-task-item ${isCompleted ? 'completed' : ''}`} key={task.id}>
-									<div className="wl-task-info">
-										<h4>{task.title}</h4>
-										<p>{task.description}</p>
-									</div>
-									{task.id === 5 ? (
-										<div className="wl-quote-input-container" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
-											{!isCompleted && user && (
-												<button className="wl-task-btn" onClick={() => window.open(task.url, '_blank', 'noopener,noreferrer')}>QUOTE</button>
-											)}
-											<div style={{ display: 'flex', gap: '0.5rem' }}>
-												<input 
-													type="text" 
-													className="wl-address-input" 
-													style={{ padding: '0.5rem', minWidth: '200px', fontSize: '0.8rem' }}
-													placeholder={user ? "Paste quote link..." : "Connect X first"}
-													value={quoteTweetLink || ''}
-													onChange={(e) => setQuoteTweetLink(e.target.value)}
-													disabled={isCompleted || !user}
-												/>
-												{!isCompleted && user && (
-													<button 
-														className="wl-task-btn" 
-														onClick={() => {
-															if (quoteTweetLink && (quoteTweetLink.includes('x.com/') || quoteTweetLink.includes('twitter.com/'))) {
-																setCompletedTasks([...completedTasks, task.id]);
-															}
-														}}
-														disabled={!quoteTweetLink || !quoteTweetLink.trim()}
-													>
-														VERIFY
-													</button>
-												)}
-												{isCompleted && (
-													<button className="wl-task-btn done" disabled>DONE</button>
-												)}
-											</div>
-										</div>
-									) : (
-										<button 
-											className={`wl-task-btn ${isCompleted ? 'done' : ''}`}
-											onClick={() => handleTaskClick(task.id, task.url)}
-											disabled={isCompleted || !user}
-										>
-											{isCompleted ? 'DONE' : (user ? task.action : 'CONNECT X FIRST')}
-										</button>
-									)}
-								</div>
-							);
-						})}
-					</div>
-				</div>
-
-				<div className="wl-details-section">
-					<div className="wl-details-header">
-						<span>YOUR DETAILS</span>
-					</div>
-					
-					<div className="wl-address-input-group" style={{ marginTop: '0', paddingTop: '0', borderTop: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-						<div>
-							<div className="wl-address-label" style={{ marginBottom: '0.5rem' }}>
-								<strong>DISCORD USERNAME</strong>
-								<span>Enter the Sanctum</span>
-							</div>
-							<input 
-								type="text" 
-								className="wl-address-input" 
-								placeholder={completedTasks.length < tasks.length ? "Complete tasks first..." : "e.g. hauntinghood#1234"} 
-								value={discordUser}
-								onChange={(e) => setDiscordUser(e.target.value)}
-								disabled={alreadyClaimed || claiming || completedTasks.length < tasks.length || !user}
-							/>
-						</div>
-						
-						<div>
-							<div className="wl-address-label" style={{ marginBottom: '0.5rem' }}>
-								<strong>WALLET ADDRESS</strong>
-								<span>where we drop the spoils</span>
-							</div>
-							<input 
-								type="text" 
-								className="wl-address-input" 
-								placeholder={completedTasks.length < tasks.length ? "Complete tasks first..." : "Submit your ETH address..."} 
-								value={walletAddress}
-								onChange={(e) => setWalletAddress(e.target.value)}
-								disabled={alreadyClaimed || claiming || completedTasks.length < tasks.length || !user}
-							/>
-						</div>
-					</div>
-				</div>
-
-				{claimError && <div className="wl-error" style={{color: '#ff4d4d', marginTop: '1rem', textAlign: 'center'}}>{claimError}</div>}
-				
-				{alreadyClaimed ? (
-					<button className="wl-submit-btn claimed" disabled>
-						APPLICATION SUBMITTED <span>✓</span>
-					</button>
-				) : (
-					<button 
-						className="wl-submit-btn" 
-						disabled={completedTasks.length < tasks.length || !user || !walletAddress.trim() || !discordUser.trim() || claiming}
-						onClick={() => submitClaim(null)}
-					>
-						{claiming ? 'SUBMITTING...' : 'APPLY FOR GTD'}
-					</button>
-				)}
-				
+				<p className="seal-breaking-note">
+					Live now on OpenSea — 4444 Haunting Hoods
+				</p>
 			</div>
 		</section>
 	);
