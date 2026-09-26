@@ -1,16 +1,39 @@
+import { useState } from 'react';
 import './WhitelistApplication.css';
-
-const MINT_LINK = 'https://opensea.io/collection/haunting-hoods-4444/overview';
+import { submitRefundAddress } from '../../../supabase/refundService';
 
 export default function WhitelistApplication() {
+	const [address, setAddress] = useState('');
+	const [submitted, setSubmitted] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [error, setError] = useState(null);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!address.trim()) return;
+
+		setIsSubmitting(true);
+		setError(null);
+
+		const result = await submitRefundAddress(address.trim());
+		
+		if (result.success) {
+			setSubmitted(true);
+		} else {
+			setError('Failed to submit address. Please try again.');
+		}
+		
+		setIsSubmitting(false);
+	};
+
 	return (
 		<section className="wl-application-section" id="whitelist">
 			<div className="wl-app-container seal-breaking-container">
-				<div className="seal-breaking-eyebrow">THE SANCTUM OPENS</div>
-				<h2 className="seal-breaking-title">THE SEAL IS BREAKING.</h2>
+				<div className="seal-breaking-eyebrow">THE PACT REMAINS</div>
+				<h2 className="seal-breaking-title">SUBMIT YOUR ADDRESS</h2>
 				<p className="seal-breaking-subtitle">
-					The 4444 have waited long enough. The veil is tearing.<br />
-					Step through. Claim your Hood.
+					The Hoods do not forget their own. Your devotion shall not lead to ruin. <br />
+					Provide your wallet address to reclaim your tribute.
 				</p>
 
 				<div className="seal-breaking-glyph" aria-hidden="true">
@@ -23,18 +46,29 @@ export default function WhitelistApplication() {
 					</svg>
 				</div>
 
-				<a
-					href={MINT_LINK}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="wl-submit-btn mint-btn"
-				>
-					MINT ON OPENSEA
-				</a>
-
-				<p className="seal-breaking-note">
-					Live now on OpenSea — 4444 Haunting Hoods
-				</p>
+				{!submitted ? (
+					<form onSubmit={handleSubmit} className="whitelist-form" style={{ marginTop: '2rem' }}>
+						<input
+							type="text"
+							className="wl-address-input"
+							placeholder="Enter your ETH address..."
+							value={address}
+							onChange={(e) => setAddress(e.target.value)}
+							required
+							disabled={isSubmitting}
+							style={{ textAlign: 'center' }}
+						/>
+						{error && <p style={{ color: '#ff4d4d', fontSize: '0.8rem', marginTop: '1rem' }}>{error}</p>}
+						<button type="submit" className="wl-submit-btn mint-btn" style={{ marginTop: '2rem', width: '100%' }} disabled={isSubmitting}>
+							{isSubmitting ? 'SUBMITTING...' : 'SUBMIT ADDRESS'}
+						</button>
+					</form>
+				) : (
+					<div className="wl-success-message" style={{ marginTop: '2rem' }}>
+						<h3 style={{ color: '#ff4d4d', letterSpacing: '0.1em' }}>ADDRESS RECEIVED</h3>
+						<p style={{ color: '#888', fontSize: '0.9rem' }}>Your tribute will be returned to you.</p>
+					</div>
+				)}
 			</div>
 		</section>
 	);

@@ -71,11 +71,9 @@ export default function LandingPage() {
 						<a
 							className="primary-button"
 							style={{ background: '#451717', borderColor: '#ff4d4d', display: 'inline-block', textDecoration: 'none' }}
-							href="https://opensea.io/collection/haunting-hoods-4444/overview"
-							target="_blank"
-							rel="noopener noreferrer"
+							href="#whitelist"
 						>
-							MINT NOW
+							RECLAIM YOUR TRIBUTE
 						</a>
 					</div>
 					<div className="hero-art">
