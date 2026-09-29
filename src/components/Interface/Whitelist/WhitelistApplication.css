@@ -3,6 +3,9 @@
 	background: #000;
 	color: #fff;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4rem;
 	justify-content: center;
 	border: none;
 	font-family: 'Inter', sans-serif;
@@ -570,4 +573,188 @@
 	font-size: 0.9rem;
 	text-align: center;
 	margin-top: 1rem;
+}
+
+/* === PVP TEASER === */
+.pvp-video-wrapper {
+	position: relative;
+	width: 100%;
+	border: 1px solid rgba(255, 77, 77, 0.2);
+	border-radius: 4px;
+	background: #050505;
+	padding: 0.5rem;
+	box-shadow: 0 0 40px rgba(255, 77, 77, 0.1);
+	overflow: hidden;
+}
+
+.pvp-teaser-video {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 2px;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	position: relative;
+	z-index: 2;
+}
+
+.video-glow-overlay {
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: radial-gradient(circle, rgba(255, 77, 77, 0.15) 0%, transparent 60%);
+	pointer-events: none;
+	z-index: 1;
+	animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+	0% { opacity: 0.5; transform: scale(1); }
+	100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* === ANCIENT BOOK MODAL === */
+.ancient-book-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(5px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	animation: fadeIn 0.3s ease-out;
+}
+
+.ancient-book-modal {
+	position: relative;
+	width: 90%;
+	max-width: 800px;
+	max-height: 85vh;
+	background: #080303;
+	border: 2px solid #3a0a0a;
+	box-shadow: 0 0 50px rgba(255, 0, 0, 0.1), inset 0 0 100px rgba(0, 0, 0, 0.9);
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	animation: bookOpen 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+	overflow: hidden;
+}
+
+/* Add a spine/binding effect on the left */
+.ancient-book-modal::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 40px;
+	height: 100%;
+	background: linear-gradient(to right, #000, #1a0505 50%, #000);
+	border-right: 1px solid #3a0a0a;
+	z-index: 0;
+}
+
+.book-close-btn {
+	position: absolute;
+	top: 1.5rem;
+	right: 1.5rem;
+	background: none;
+	border: none;
+	color: #ff4d4d;
+	font-size: 1.5rem;
+	cursor: pointer;
+	z-index: 10;
+	transition: all 0.3s;
+}
+
+.book-close-btn:hover {
+	transform: scale(1.1) rotate(90deg);
+	color: #fff;
+}
+
+.book-content-inner {
+	position: relative;
+	z-index: 1;
+	padding: 4rem 3rem 4rem 5rem;
+	overflow-y: auto;
+	color: #ccc;
+	font-family: 'Space Mono', monospace;
+	font-size: 0.9rem;
+	line-height: 1.8;
+}
+
+.book-content-inner::-webkit-scrollbar {
+	width: 8px;
+}
+.book-content-inner::-webkit-scrollbar-track {
+	background: rgba(0,0,0,0.5);
+}
+.book-content-inner::-webkit-scrollbar-thumb {
+	background: #3a0a0a;
+	border-radius: 4px;
+}
+
+.book-title {
+	font-family: 'Lincoln Road Regular', Arial, sans-serif;
+	font-size: 2.5rem;
+	color: #ff4d4d;
+	text-align: center;
+	letter-spacing: 0.1em;
+	margin-bottom: 2rem;
+	text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+}
+
+.book-subtitle {
+	color: #fff;
+	font-size: 1.2rem;
+	letter-spacing: 0.1em;
+	margin: 2.5rem 0 1rem;
+	border-bottom: 1px solid #3a0a0a;
+	padding-bottom: 0.5rem;
+}
+
+.book-content-inner p {
+	margin-bottom: 1.2rem;
+}
+
+.book-warning {
+	color: #ffaa00;
+	font-size: 0.85rem;
+	margin: 2rem 0;
+	padding: 1rem;
+	border-left: 2px solid #ffaa00;
+	background: rgba(255, 170, 0, 0.05);
+}
+
+.read-btn:hover {
+	background: rgba(255, 77, 77, 0.1) !important;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes bookOpen {
+	from {
+		opacity: 0;
+		transform: perspective(1000px) rotateY(-90deg) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: perspective(1000px) rotateY(0deg) scale(1);
+	}
+}
+
+@media (max-width: 768px) {
+	.book-content-inner {
+		padding: 3rem 1.5rem 3rem 3.5rem;
+	}
+	.ancient-book-modal::before {
+		width: 25px;
+	}
 }
