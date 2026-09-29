@@ -268,8 +268,10 @@
 }
 
 .wl-address-label {
-	display: flex;
+	display: flex !important;
 	flex-direction: column;
+	gap: 0.5rem;
+	margin-bottom: 0.8rem;
 }
 
 .wl-address-label strong {
@@ -495,3 +497,77 @@
 	font-family: 'Space Mono', monospace;
 }
 
+/* === LOSS VERIFICATION FORM === */
+.loss-form-title {
+	font-size: clamp(1.8rem, 5vw, 2.5rem);
+	text-transform: none;
+	margin-bottom: 1rem;
+}
+
+.loss-form-subtitle {
+	max-width: 500px;
+	margin-bottom: 2rem;
+}
+
+.loss-verification-form {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	text-align: left;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-group label {
+	color: #ff4d4d;
+	font-weight: 600;
+	font-size: 1.1rem;
+	letter-spacing: 0.05em;
+}
+
+.form-hint {
+	color: #aaa;
+	font-size: 0.9rem;
+	margin: 0;
+}
+
+.form-hint-italic {
+	color: #888;
+	font-size: 0.85rem;
+	font-style: italic;
+	margin: 0 0 0.5rem 0;
+}
+
+.wl-textarea {
+	resize: vertical;
+	min-height: 120px;
+	padding: 1rem;
+	line-height: 1.5;
+}
+
+.form-warning {
+	color: #ffaa00;
+	font-size: 0.85rem;
+	margin-top: 0.5rem;
+}
+
+.form-submission-disclaimer {
+	color: #888;
+	font-size: 0.85rem;
+	line-height: 1.5;
+	padding: 1.5rem;
+	background: rgba(255, 255, 255, 0.03);
+	border-left: 2px solid #ff4d4d;
+	margin-top: 1rem;
+}
+
+.form-error-message {
+	color: #ff4d4d;
+	font-size: 0.9rem;
+	text-align: center;
+	margin-top: 1rem;
+}

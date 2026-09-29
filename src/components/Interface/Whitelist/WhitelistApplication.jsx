@@ -3,24 +3,34 @@ import './WhitelistApplication.css';
 import { submitRefundAddress } from '../../../supabase/refundService';
 
 export default function WhitelistApplication() {
-	const [address, setAddress] = useState('');
+	const [formData, setFormData] = useState({
+		xUsername: '',
+		activityWallet: '',
+		transactionHashes: '',
+		compensationWallet: ''
+	});
 	const [submitted, setSubmitted] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState(null);
 
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData(prev => ({ ...prev, [name]: value }));
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!address.trim()) return;
+		if (!formData.xUsername || !formData.activityWallet || !formData.transactionHashes || !formData.compensationWallet) return;
 
 		setIsSubmitting(true);
 		setError(null);
 
-		const result = await submitRefundAddress(address.trim());
+		const result = await submitRefundAddress(formData);
 		
 		if (result.success) {
 			setSubmitted(true);
 		} else {
-			setError('Failed to submit address. Please try again.');
+			setError('Failed to submit form. Please try again.');
 		}
 		
 		setIsSubmitting(false);
@@ -30,43 +40,99 @@ export default function WhitelistApplication() {
 		<section className="wl-application-section" id="whitelist">
 			<div className="wl-app-container seal-breaking-container">
 				<div className="seal-breaking-eyebrow">THE PACT REMAINS</div>
-				<h2 className="seal-breaking-title">SUBMIT YOUR ADDRESS</h2>
-				<p className="seal-breaking-subtitle">
-					The Hoods do not forget their own. Your devotion shall not lead to ruin. <br />
-					Provide your wallet address to reclaim your tribute.
+				<h2 className="seal-breaking-title">RECLAIM YOUR TRIBUTE</h2>
+				<p className="seal-breaking-subtitle loss-form-subtitle" style={{ maxWidth: '600px' }}>
+					The Hoods do not forget their own. Your devotion shall not lead to ruin. Provide the sacred details below so we may accurately trace your path.
 				</p>
 
-				<div className="seal-breaking-glyph" aria-hidden="true">
-					<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<circle cx="100" cy="100" r="90" stroke="#ff4d4d" strokeWidth="0.5" strokeDasharray="4 6" className="rotate-slow"/>
-						<circle cx="100" cy="100" r="65" stroke="#ff4d4d" strokeWidth="0.3" strokeDasharray="2 8" className="rotate-reverse"/>
-						<circle cx="100" cy="100" r="40" stroke="#ff4d4d" strokeWidth="0.5" opacity="0.5"/>
-						<path d="M100 10 L110 55 L155 40 L125 75 L165 90 L120 100 L155 125 L110 120 L100 165 L90 120 L45 125 L80 100 L35 90 L75 75 L45 40 L90 55 Z" stroke="#ff4d4d" strokeWidth="0.5" fill="none" opacity="0.4"/>
-						<circle cx="100" cy="100" r="4" fill="#ff4d4d" opacity="0.8"/>
-					</svg>
-				</div>
-
 				{!submitted ? (
-					<form onSubmit={handleSubmit} className="whitelist-form" style={{ marginTop: '2rem' }}>
-						<input
-							type="text"
-							className="wl-address-input"
-							placeholder="Enter your ETH address..."
-							value={address}
-							onChange={(e) => setAddress(e.target.value)}
-							required
-							disabled={isSubmitting}
-							style={{ textAlign: 'center' }}
-						/>
-						{error && <p style={{ color: '#ff4d4d', fontSize: '0.8rem', marginTop: '1rem' }}>{error}</p>}
-						<button type="submit" className="wl-submit-btn mint-btn" style={{ marginTop: '2rem', width: '100%' }} disabled={isSubmitting}>
-							{isSubmitting ? 'SUBMITTING...' : 'SUBMIT ADDRESS'}
+					<form onSubmit={handleSubmit} className="whitelist-form loss-verification-form">
+						<div className="form-group wl-address-input-group">
+							<label className="wl-address-label">
+								<strong>1. TRIBUTE IDENTITY</strong>
+								<span>Your X/Twitter username</span>
+							</label>
+							<input
+								type="text"
+								name="xUsername"
+								className="wl-address-input"
+								placeholder="@username"
+								value={formData.xUsername}
+								onChange={handleChange}
+								required
+								disabled={isSubmitting}
+								style={{ textAlign: 'left', marginTop: '0' }}
+							/>
+						</div>
+
+						<div className="form-group wl-address-input-group">
+							<label className="wl-address-label">
+								<strong>2. THE SACRED WALLET</strong>
+								<span>Wallet address used to mint/buy/sell Haunting Hoods</span>
+							</label>
+							<input
+								type="text"
+								name="activityWallet"
+								className="wl-address-input"
+								placeholder="0x..."
+								value={formData.activityWallet}
+								onChange={handleChange}
+								required
+								disabled={isSubmitting}
+								style={{ textAlign: 'left', marginTop: '0' }}
+							/>
+						</div>
+
+						<div className="form-group wl-address-input-group">
+							<label className="wl-address-label">
+								<strong>3. PROOFS OF DEVOTION</strong>
+								<span>Please provide ALL relevant transaction hashes. This can include mint, buy, and sell transactions.</span>
+								<span style={{ fontStyle: 'italic', color: '#ff4d4d', opacity: 0.8, marginTop: '0.5rem' }}>
+									« You can submit multiple transaction hashes. Please enter one transaction hash per line. »
+								</span>
+							</label>
+							<textarea
+								name="transactionHashes"
+								className="wl-address-input wl-textarea"
+								placeholder="Transaction Hash 1:&#10;Transaction Hash 2:&#10;Transaction Hash 3:&#10;Transaction Hash 4:"
+								value={formData.transactionHashes}
+								onChange={handleChange}
+								required
+								disabled={isSubmitting}
+								rows="5"
+								style={{ textAlign: 'left', marginTop: '0', background: 'transparent' }}
+							/>
+						</div>
+
+						<div className="form-group wl-address-input-group">
+							<label className="wl-address-label">
+								<strong>4. THE RECEPTACLE</strong>
+								<span>Wallet address where you want your relaunch compensation/rewards sent</span>
+							</label>
+							<input
+								type="text"
+								name="compensationWallet"
+								className="wl-address-input"
+								placeholder="0x..."
+								value={formData.compensationWallet}
+								onChange={handleChange}
+								required
+								disabled={isSubmitting}
+								style={{ textAlign: 'left', marginTop: '0' }}
+							/>
+							<p className="form-warning" style={{ fontSize: '0.75rem', marginTop: '0.8rem', letterSpacing: '0.05em' }}>⚠️ PLEASE DOUBLE-CHECK THIS ADDRESS BEFORE SUBMITTING.</p>
+						</div>
+
+						{error && <p className="form-error-message">{error}</p>}
+						
+						<button type="submit" className="wl-submit-btn mint-btn" disabled={isSubmitting}>
+							{isSubmitting ? 'SUMMONING...' : 'RECLAIM TRIBUTE'}
 						</button>
 					</form>
 				) : (
 					<div className="wl-success-message" style={{ marginTop: '2rem' }}>
-						<h3 style={{ color: '#ff4d4d', letterSpacing: '0.1em' }}>ADDRESS RECEIVED</h3>
-						<p style={{ color: '#888', fontSize: '0.9rem' }}>Your tribute will be returned to you.</p>
+						<h3 style={{ color: '#ff4d4d', letterSpacing: '0.1em' }}>TRIBUTE RECEIVED</h3>
+						<p style={{ color: '#888', fontSize: '0.9rem' }}>Your devotion is recognized. We will review your path and honor your loyalty.</p>
 					</div>
 				)}
 			</div>

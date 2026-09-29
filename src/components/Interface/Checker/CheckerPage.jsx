@@ -13,7 +13,6 @@ export default function CheckerPage() {
 				<nav className="landing-links">
 					<a href="/lore">LORE</a>
 					<a href="/utility">UTILITY</a>
-					<a href="/checker">CHECK ELIGIBILITY</a>
 				</nav>
 				<button className="menu-button" aria-label="Open menu">☰</button>
 			</header>

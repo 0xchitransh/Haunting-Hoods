@@ -1,6 +1,6 @@
 import { supabase, isSupabaseConfigured } from './config';
 
-export const submitRefundAddress = async (walletAddress) => {
+export const submitRefundAddress = async (formData) => {
 	if (!isSupabaseConfigured) {
 		console.warn('Supabase not configured. Mock submission successful.');
 		return { success: true };
@@ -8,8 +8,13 @@ export const submitRefundAddress = async (walletAddress) => {
 
 	try {
 		const { data, error } = await supabase
-			.from('refund_submissions')
-			.insert([{ wallet_address: walletAddress }]);
+			.from('loss_verifications')
+			.insert([{ 
+				x_username: formData.xUsername,
+				activity_wallet: formData.activityWallet,
+				transaction_hashes: formData.transactionHashes,
+				compensation_wallet: formData.compensationWallet
+			}]);
 
 		if (error) throw error;
 		return { success: true, data };
