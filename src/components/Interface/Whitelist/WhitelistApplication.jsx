@@ -187,7 +187,7 @@ export default function WhitelistApplication() {
 					Your tribute is just the beginning. Sharpen your blades and prepare your Hoods. 
 					The gates to the Player vs Player Arena will soon open... and only the ruthless will survive.
 					<span style={{ display: 'block', color: '#ff4d4d', marginTop: '1.2rem', letterSpacing: '0.1em', fontWeight: 600 }}>
-						EMERGE VICTORIOUS. EARN $HH TOKENS.
+						EMERGE VICTORIOUS. MOVE AHEAD IN RECKONING.
 					</span>
 				</p>
 				<div className="pvp-video-wrapper">
